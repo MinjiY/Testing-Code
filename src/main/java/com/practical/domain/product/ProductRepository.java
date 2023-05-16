@@ -1,2 +1,18 @@
-package com.practical.domain.product;public interface ProductRepository {
+package com.practical.domain.product;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+
+@Repository
+
+public interface ProductRepository extends JpaRepository<Product, Long> {
+
+    /**
+     * select *
+     * from product
+     * where selling_type in ('SELLING', 'HOLD');
+     */
+    List<Product> findAllBySellingTypeIn(List<ProductSellingType> sellingTypes);
 }

@@ -1,5 +1,6 @@
 package com.practical.domain;
 
+import com.sun.istack.NotNull;
 import lombok.Getter;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -14,6 +15,7 @@ import java.time.LocalDateTime;
 @EntityListeners(AuditingEntityListener.class)
 public abstract class BaseEntity {
 
+    @NotNull
     @CreatedDate
     private LocalDateTime createdDateTime;
 

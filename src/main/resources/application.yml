@@ -10,7 +10,7 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: none
+      ddl-auto: create
     properties:
       hibernate:
         show_sql: true
@@ -32,6 +32,9 @@ spring:
   config:
     activate:
       on-profile: local
+  sql:
+    init:
+      mode: always
 
   jpa:
     hibernate:

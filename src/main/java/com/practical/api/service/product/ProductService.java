@@ -4,7 +4,7 @@ package com.practical.api.service.product;
 import com.practical.api.service.product.response.ProductResponse;
 import com.practical.domain.product.Product;
 import com.practical.domain.product.ProductRepository;
-import com.practical.domain.product.ProductSellingType;
+import com.practical.domain.product.ProductSellingStatus;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +18,7 @@ public class ProductService {
     private final ProductRepository productRepository;
 
     public List<ProductResponse> getSellingProducts(){
-        List<Product> products = productRepository.findAllBySellingTypeIn(ProductSellingType.forDisplay());
+        List<Product> products = productRepository.findAllBySellingStatusIn(ProductSellingStatus.forDisplay());
         return products.stream()
                 .map(product -> ProductResponse.of(product))
                 .collect(Collectors.toList());

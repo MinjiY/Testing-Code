@@ -3,6 +3,7 @@ package com.practical.api.service.order;
 import com.practical.api.controller.order.request.OrderCreateRequest;
 import com.practical.api.service.order.response.OrderResponse;
 import com.practical.domain.Order.Order;
+import com.practical.domain.Order.OrderRespository;
 import com.practical.domain.product.Product;
 import com.practical.domain.product.ProductRepository;
 import lombok.RequiredArgsConstructor;
@@ -16,6 +17,8 @@ import java.util.List;
 public class OrderService {
 
     private final ProductRepository productRepository;
+    private final OrderRespository orderRespository;
+
     public OrderResponse createOrder(OrderCreateRequest request, LocalDateTime registeredDateTime) {
         List<String> productNumbers = request.getProductNumbers();
         // Product
@@ -23,7 +26,9 @@ public class OrderService {
 
         Order order = Order.create(products, registeredDateTime);
 
+        Order savedOrder = orderRespository.save(order);
+
         // Order;
-        return null;
+        return OrderResponse.of(savedOrder);
     }
 }

@@ -11,6 +11,7 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 @Getter
@@ -42,6 +43,9 @@ public class Order extends BaseEntity {
         this.orderStatus = OrderStatus.INIT;
         this.totalPrice = calculateTotalPrice(products);
         this.registeredDateTime = now;
+        this.orderProducts = products.stream()
+                .map(product -> new OrderProduct(this, product))
+                .collect(Collectors.toList());
     }
 
     public static Order create(List<Product> products) {
